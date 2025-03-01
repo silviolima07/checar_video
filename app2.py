@@ -20,13 +20,13 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 
 def extrair_audio(video_path):
-    st.write('Video path:', video_path)
+    st.write('Video File', video_path)
     video = AudioSegment.from_file(video_path, format="mp4")
     audio = video.set_channels(1).set_frame_rate(16000)
     audio.export(f'{MEDIA_FOLDER}/{AUDIO_FILE}', format="wav")
     st.audio(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
     st.success("🎧 Audio: Extração  concluida e salva!")
-    st.write(f'File: {MEDIA_FOLDER}/{AUDIO_FILE}')
+    st.write(f'Audio File: {MEDIA_FOLDER}/{AUDIO_FILE}')
 
 # Função para processar áudio capturado
 def process_audio_data(audio_file):
@@ -38,7 +38,8 @@ def process_audio_data(audio_file):
             model = whisper.load_model("small")
             result = model.transcribe(audio_file)
             transcribed_text = result["text"]
-            st.text(transcribed_text[:1000])  # Exibir os primeiros 1000 caracteres do texto 
+            if st.sidebar.button('Text File'):
+                st.text(transcribed_text[:1000])  # Exibir os primeiros 1000 caracteres do texto 
             #st.write("Transcricao ok")
         except Exception as e:
             st.error(f'Checar modulo transcricao: {e}')
@@ -49,7 +50,7 @@ def process_audio_data(audio_file):
             with open(file_path, 'w', encoding='utf-8') as f: # 'w' para texto
                 f.write(transcribed_text)
             st.success("🎧 Audio -> Texto: Transcricao  concluida e salva!")  
-            st.write(f'File: {MEDIA_FOLDER}/{TEXT_FILE}')
+            st.write(f'Text File: {MEDIA_FOLDER}/{TEXT_FILE}')
             
             
         except Exception as e:
