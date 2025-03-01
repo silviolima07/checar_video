@@ -178,14 +178,14 @@ def app():
                except Exception as e:
                    st.error(f'Checar extrair_audio: {e}')
                    
-               if audio:
-                   try:
-                       st.markdown('#### Processar audio e gerar txt') 
-                       #with st.spinner("Transcrever audio"):
-                       # Extrair audio from video
-                       process_audio_data(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
-                   except Exception as e:
-                       st.error(f'Checar process_audio_data: {e}')
+            
+               try:
+                   st.markdown('#### Processar audio e gerar txt') 
+                   #with st.spinner("Transcrever audio"):
+                   # Extrair audio from video
+                   process_audio_data(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
+               except Exception as e:
+                   st.error(f'Checar process_audio_data: {e}')
                                        
                         
         
