@@ -213,11 +213,11 @@ def app():
                except Exception as e:
                    st.error(f'Checar process_audio_data: {e}')
             
-            #  Criar agent e task
-            st.markdown("#### Criar agent e task no CrewAI")
-            recrutador, analisar = criar_agent_task()            
-            crew = Crew(agents=[recrutador], tasks=[analisar])
-            inputs = {'texto': transcribed_text, 'pontos': pontos}           
+               #  Criar agent e task
+               st.markdown("#### Criar agent e task no CrewAI")
+               recrutador, analisar = criar_agent_task()            
+               crew = Crew(agents=[recrutador], tasks=[analisar])
+               inputs = {'texto': transcribed_text, 'pontos': pontos}           
         
 __init__()
 app()
