@@ -20,7 +20,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 
 def extrair_audio(video_path):
-    st.write('Video File', video_path)
+    st.write('Video File: ', video_path)
     video = AudioSegment.from_file(video_path, format="mp4")
     audio = video.set_channels(1).set_frame_rate(16000)
     audio.export(f'{MEDIA_FOLDER}/{AUDIO_FILE}', format="wav")
@@ -38,8 +38,8 @@ def process_audio_data(audio_file):
             model = whisper.load_model("small")
             result = model.transcribe(audio_file)
             transcribed_text = result["text"]
-            if st.button('Text File'):
-                st.text(transcribed_text[:1000])  # Exibir os primeiros 1000 caracteres do texto 
+            #if st.button('Text File'):
+            st.text(transcribed_text[:1000])  # Exibir os primeiros 1000 caracteres do texto 
             #st.write("Transcricao ok")
         except Exception as e:
             st.error(f'Checar modulo transcricao: {e}')
