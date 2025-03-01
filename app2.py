@@ -172,7 +172,7 @@ def app():
                        audio = extrair_audio(video_path)
                except Exception as e:
                    st.error(f'Checar extrair_audio: {e}')
-                   break
+                   
             
                try:
                    st.markdown('#### Processar audio e gerar txt') 
@@ -181,7 +181,7 @@ def app():
                        process_audio_data(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
                except Exception as e:
                    st.error(f'Checar process_audio_data: {e}')
-                   break                    
+                                       
                         
         
 __init__()
