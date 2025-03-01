@@ -25,6 +25,7 @@ def extrair_audio(video_path):
     audio = video.set_channels(1).set_frame_rate(16000)
     audio.export(f'{MEDIA_FOLDER}/{AUDIO_FILE}', format="wav")
     st.audio(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
+    st.success("🎧 Audio: Extração  concluida e salva!")
     st.write(f'File: {MEDIA_FOLDER}/{AUDIO_FILE}')
 
 # Função para processar áudio capturado
@@ -37,7 +38,7 @@ def process_audio_data(audio_file):
             model = whisper.load_model("small")
             result = model.transcribe(audio_file)
             transcribed_text = result["text"]
-            st.write("Transcricao ok")
+            #st.write("Transcricao ok")
         except Exception as e:
             st.error(f'Checar modulo transcricao: {e}')
         
@@ -162,7 +163,7 @@ def app():
         
         #convert_video_to_audio(file_path,MEDIA_FOLDER )
         try:
-            st.write("Extrair audio")
+            st.markdown("#### Extrair audio")
             with st.spinner("Extraindo audio"):
                 # Extrair audio from video
                 audio = extrair_audio(video_path)
@@ -170,7 +171,7 @@ def app():
             st.error(f'Checar extrair_audio: {e}')
             
         try:
-            st.write('Processar audio e gerar txt') 
+            st.markdown('#### Processar audio e gerar txt') 
             with st.spinner("Transcrever audio"):
                 # Extrair audio from video
                 process_audio_data(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
