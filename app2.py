@@ -26,6 +26,7 @@ def extrair_audio(video_path):
     st.audio(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
     st.write(f'File: {MEDIA_FOLDER}/{AUDIO_FILE}')
 
+
 # Função para processar áudio capturado
 def process_audio_data(audio_file):
 
