@@ -178,7 +178,7 @@ def app():
                except Exception as e:
                    st.error(f'Checar extrair_audio: {e}')
                    
-                if audio:
+               if audio:
                    try:
                        st.markdown('#### Processar audio e gerar txt') 
                        #with st.spinner("Transcrever audio"):
