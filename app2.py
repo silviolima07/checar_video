@@ -43,6 +43,7 @@ def process_audio_data(audio_file):
         except Exception as e:
             st.error(f'Checar modulo transcricao: {e}')
         
+        
         try:            
             file_path = f'{MEDIA_FOLDER}/{TEXT_FILE}'
             with open(file_path, 'w', encoding='utf-8') as f: # 'w' para texto
