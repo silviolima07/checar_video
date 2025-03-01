@@ -10,6 +10,8 @@ from utils import convert_video_to_audio
 from dotenv import load_dotenv
 import ffmpeg
 from pydub import AudioSegment
+from crewai import Agent, Task, Crew
+
 
 MEDIA_FOLDER = 'medias'
 AUDIO_FILE = 'audio.wav'
@@ -32,13 +34,13 @@ def extrair_audio(video_path):
 def process_audio_data(audio_file):
 
     #st.audio(audio_file)
-    with st.spinner(' 🎧 Audio Transformando audio em texto...'): # Transcricao
+    with st.spinner(' 🎧 Transformando Audio em Texto...'): # Transcricao
         
         try:
             model = whisper.load_model("small")
             result = model.transcribe(audio_file)
             transcribed_text = result["text"]
-            #if st.button('Text File'):
+            st.markdown('#### Texto Extraído:'):
             st.text(transcribed_text[:1000])  # Exibir os primeiros 1000 caracteres do texto 
             #st.write("Transcricao ok")
         except Exception as e:
@@ -88,9 +90,9 @@ def get_insights(video_path):
     if video_file.state.name == "FAILED":
         raise ValueError(video_file.state.name)
     
-    goals = 'Level of education, English level, Experience with languages such as Python'
+    pontos = 'Level of education, English level, Experience with languages such as Python'
     
-    prompt = f"Answer always in Portuguese. Describe the video. Provides the insights from the video. At the end shows the main points according to this list:{goals}"
+    prompt = f"Answer always in Portuguese. Describe the video. Provides the insights from the video. At the end shows the main points according to this list:{pontos}"
 
     model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
     with st.spinner("..."):
@@ -127,6 +129,30 @@ def get_insights(video_path):
     st.write(response.text)
     genai.delete_file(video_file.name)
 
+
+def criar_agent_task():
+    """
+    Criar a agente que irá  analisar o texto extraído,resumir e identificar os pontos importantes.
+    """
+    recrutador = Agent(
+        role="Recrutador",
+        goal="Analisar o texto, identificar os pontos considerados importantes e gerar um resumo.",
+        backstory="Vocé é um recrutador experiênte e conssegue analisar um texto extraído de uma entrevista com um candidato.",
+        verbose=True,
+        allow_delegation=False,
+        llm=llm
+    )
+
+    analisar = Task(
+        description=f"Análise o texto: {texto} Identifique os pontos considerados importantes: {pontos}. Na resposta, formeça um resumo e indique se os pontos imprtantes foram identificados",
+        expected_output="Respostas claras baseadas no texto.",
+        agent=recrutador
+    )
+
+    
+    
+    
+    
 
 def app():
     html_page_title = """
@@ -186,8 +212,12 @@ def app():
                        process_audio_data(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
                except Exception as e:
                    st.error(f'Checar process_audio_data: {e}')
-                                       
-                        
+            
+            #  Criar agent e task
+            st.markdown("#### Criar agent e task no CrewAI")
+            recrutador, analisar = criar_agent_task()            
+            crew = Crew(agents=[recrutador], tasks=[analisar])
+            inputs = {'texto': transcribed_text, 'pontos': pontos}           
         
 __init__()
 app()
