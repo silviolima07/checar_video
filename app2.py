@@ -20,6 +20,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 
 def extrair_audio(video_path):
+    st.write('Video path:', video_path)
     video = AudioSegment.from_file(video_path, format="mp4")
     audio = video.set_channels(1).set_frame_rate(16000)
     audio.export(f'{MEDIA_FOLDER}/{AUDIO_FILE}', format="wav")
