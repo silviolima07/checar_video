@@ -135,13 +135,15 @@ def app():
     st.markdown("### Objetivo:")
     st.markdown("#### Identificar pontos principais numa candidatura de vaga")
     
-    lista_model = ["llama-3.1-70b-versatile"]
+    lista_model = ["llama-3.1-70b-versatile", 'gemini-1.5-flash']
     MODEL = st.sidebar.selectbox(
         "Selecione o modelo:",
         lista_model
     )
     st.sidebar.markdown("### LLM: " )
     st.sidebar.markdown("### " + MODEL)
+    
+    
     
     # Initialize LLM
     llm = ChatGroq(
@@ -161,22 +163,25 @@ def app():
         #if os.path.exists(file_path):  ## Optional: Removing uploaded files from the temporary location
         #    os.remove(file_path)
         
-        #convert_video_to_audio(file_path,MEDIA_FOLDER )
-        try:
-            st.markdown("#### Extrair audio")
-            with st.spinner("Extraindo audio"):
-                # Extrair audio from video
-                audio = extrair_audio(video_path)
-        except Exception as e:
-            st.error(f'Checar extrair_audio: {e}')
+        if st.button("Start Analysis"):
+           if MODEL == lista_model[0]:
+               try:
+                   st.markdown("#### Extrair audio")
+                   with st.spinner("Extraindo audio"):
+                       # Extrair audio from video
+                       audio = extrair_audio(video_path)
+                except Exception as e:
+                    st.error(f'Checar extrair_audio: {e}')
+                    break
             
-        try:
-            st.markdown('#### Processar audio e gerar txt') 
-            with st.spinner("Transcrever audio"):
-                # Extrair audio from video
-                process_audio_data(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
-        except Exception as e:
-            st.error(f'Checar process_audio_data: {e}')        
+               try:
+                   st.markdown('#### Processar audio e gerar txt') 
+                   with st.spinner("Transcrever audio"):
+                       # Extrair audio from video
+                       process_audio_data(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
+                except Exception as e:
+                    st.error(f'Checar process_audio_data: {e}')
+                    break                    
                         
         
 __init__()
