@@ -38,6 +38,7 @@ def process_audio_data(audio_file):
             model = whisper.load_model("small")
             result = model.transcribe(audio_file)
             transcribed_text = result["text"]
+            st.text(transcribed_text[:1000])  # Exibir os primeiros 1000 caracteres do texto 
             #st.write("Transcricao ok")
         except Exception as e:
             st.error(f'Checar modulo transcricao: {e}')
