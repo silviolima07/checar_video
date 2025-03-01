@@ -1,0 +1,13 @@
+bokeh>=3.6.3
+litellm>=1.59.8
+python-dotenv>=1.0.1
+torch>=2.6.0
+litellm>=1.57.4
+scipy>=1.15.1
+streamlit>=1.41.1
+whisper== 1.1.10
+numpy<=2.1
+crewai==0.60.0
+groq==0.13.0
+pysqlite3-binary==0.5.4
+openai-whisper==20240930
