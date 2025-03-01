@@ -47,7 +47,8 @@ def process_audio_data(audio_file):
             with open(file_path, 'w', encoding='utf-8') as f: # 'w' para texto
                 f.write(transcribed_text)
             st.success("🎧 Audio -> Texto: Transcricao  concluida e salva!")  
-            st.write(f'File: {MEDIA_FOLDER}/{TEXT_FILE}')            
+            st.write(f'File: {MEDIA_FOLDER}/{TEXT_FILE}')
+            st.text(f'{MEDIA_FOLDER}/{TEXT_FILE}'[:1000])  # Exibir os primeiros 1000 caracteres do texto            
         except Exception as e:
             st.error(f'Checar modulo de salvamento do txt: {e}')        
         
