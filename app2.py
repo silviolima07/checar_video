@@ -49,7 +49,8 @@ def process_audio_data(audio_file):
                 f.write(transcribed_text)
             st.success("🎧 Audio -> Texto: Transcricao  concluida e salva!")  
             st.write(f'File: {MEDIA_FOLDER}/{TEXT_FILE}')
-                        
+            
+            
         except Exception as e:
             st.error(f'Checar modulo de salvamento do txt: {e}')        
         
