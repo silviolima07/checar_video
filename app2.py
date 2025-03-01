@@ -170,7 +170,7 @@ def app():
                    with st.spinner("Extraindo audio"):
                        # Extrair audio from video
                        audio = extrair_audio(video_path)
-                except Exception as e:
+               except Exception as e:
                     st.error(f'Checar extrair_audio: {e}')
                     break
             
