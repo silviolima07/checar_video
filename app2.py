@@ -141,7 +141,7 @@ def app():
         lista_model
     )
     st.sidebar.markdown("### LLM: " )
-    st.sidebar.markdown("### " + MODEL)
+    st.sidebar.markdown("## " + MODEL)
     
     
     
