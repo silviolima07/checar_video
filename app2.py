@@ -32,7 +32,7 @@ def extrair_audio(video_path):
 def process_audio_data(audio_file):
 
     #st.audio(audio_file)
-    with st.spinner(' 🎧 Audio Transformando audio em texto...'): # Transcricao
+    with st.spinner(' 🎧 Transformando Audio em Texto...'): # Transcricao
         
         try:
             model = whisper.load_model("small")
@@ -178,14 +178,14 @@ def app():
                except Exception as e:
                    st.error(f'Checar extrair_audio: {e}')
                    
-            
-               try:
-                   st.markdown('#### Processar audio e gerar txt') 
-                   with st.spinner("Transcrever audio"):
+                if audio:
+                   try:
+                       st.markdown('#### Processar audio e gerar txt') 
+                       #with st.spinner("Transcrever audio"):
                        # Extrair audio from video
                        process_audio_data(f'{MEDIA_FOLDER}/{AUDIO_FILE}')
-               except Exception as e:
-                   st.error(f'Checar process_audio_data: {e}')
+                   except Exception as e:
+                       st.error(f'Checar process_audio_data: {e}')
                                        
                         
         
