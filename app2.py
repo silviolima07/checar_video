@@ -166,6 +166,8 @@ def app():
     st.markdown("### Objetivo:")
     st.markdown("#### Identificar pontos principais numa candidatura de vaga")
     
+    pontos = 'Level of education, English level, Experience with languages such as Python'
+    
     lista_model = ["deepseek-r1-distill-llama-70b", 'gemini-1.5-flash']
     MODEL = st.sidebar.selectbox(
         "Selecione o modelo:",
@@ -216,7 +218,12 @@ def app():
                #  Criar agent e task
                st.markdown("#### Criar agent e task no CrewAI")
                MODEL = f'deepseek/{MODEL}'
-               inputs = {'texto': transcribed_text, 'pontos': pontos}
+               
+               file_path = f'{MEDIA_FOLDER}/{TEXT_FILE}' # Text File
+               with open(file_path, 'r', encoding='utf-8') as f:
+                  texto = f.read()
+               
+               inputs = {'texto': texto, 'pontos': pontos}
                recrutador, analisar = criar_agent_task(MODEL)            
                crew = Crew(
                     agents=[recrutador],
