@@ -294,14 +294,14 @@ def app():
                result = crew.kickoff(inputs=inputs)  
                st.write("Result:", result.raw)
                st.write("Token_usage:", result.token_usage)
-               processar_resposta(result.raw)
-               df = pd.DataFrame(dados)
+               #processar_resposta(result.raw)
+               #df = pd.DataFrame(dados)
 
                # Exibindo o DataFrame
-               st.table(df)
+               #st.table(df)
 
                # Salvando o DataFrame em um arquivo CSV (opcional)
-               df.to_csv("analise_candidatos.csv", index=False)
+               #df.to_csv("analise_candidatos.csv", index=False)
                               
         
 __init__()
