@@ -46,6 +46,12 @@ comunidades = []
 
 # Função para processar a resposta do modelo e extrair informações
 def processar_resposta(resposta):
+    # Função auxiliar para extrair campos com segurança
+    def extrair_campo(texto, delimitador, padrao="N/A"):
+        if delimitador in texto:
+            return texto.split(delimitador)[1].split("\n")[0].strip()
+        return padrao
+        
     # Extraindo informações da resposta (ajuste conforme necessário)
     #nome = resposta.split("Nome:")[1].strip()
     idade = resposta.split("Idade:")[1].split("anos")[0].strip()
