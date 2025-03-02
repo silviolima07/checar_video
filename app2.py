@@ -227,15 +227,15 @@ def app():
                st.write("Pontos:", pontos)
                inputs = {'texto': texto, 'pontos': pontos}
                recrutador, analisar = criar_agent_task(MODEL, texto, pontos)            
-               #crew = Crew(
-               #     agents=[recrutador],
-               #     tasks=[analisar],
-               #     process=Process.sequential,
-               #     verbose=False,
-               #     max_rpm=30
-               #      )
+               crew = Crew(
+                    agents=[recrutador],
+                    tasks=[analisar],
+                    process=Process.sequential,
+                    verbose=False,
+                    max_rpm=30
+                     )
                
-               #result = crew.kickoff(inputs=inputs)              
+               result = crew.kickoff(inputs=inputs)              
         
 __init__()
 app()
