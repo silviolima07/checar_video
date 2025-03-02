@@ -47,7 +47,7 @@ comunidades = []
 # Função para processar a resposta do modelo e extrair informações
 def processar_resposta(resposta):
     # Extraindo informações da resposta (ajuste conforme necessário)
-    nome = resposta.split("Nome:")[1].strip()
+    #nome = resposta.split("Nome:")[1].strip()
     idade = resposta.split("Idade:")[1].split("anos")[0].strip()
     cidade = resposta.split("Cidade de Residência:")[1].split("\n")[0].strip()
     educ = resposta.split("Nível de Educação:")[1].split("Nível de Inglês:")[0].strip()
@@ -58,7 +58,7 @@ def processar_resposta(resposta):
     com = resposta.split("Participação em Comunidades:")[1].split("Conclusão:")[0].strip()
 
     # Adicionando os dados às listas
-    nomes.append(nome)
+    #nomes.append(nome)
     idades.append(idade)
     cidades.append(cidade)
     educacao.append(educ)
