@@ -10,7 +10,7 @@ from utils import convert_video_to_audio
 from dotenv import load_dotenv
 import ffmpeg
 from pydub import AudioSegment
-from crewai import Agent, Task, Crew
+from crewai import Agent, Task, Crew, Process
 
 
 MEDIA_FOLDER = 'medias'
