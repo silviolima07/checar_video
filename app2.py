@@ -240,8 +240,8 @@ def app():
                #st.write("Text File:", texto)
                st.markdown("### Pontos Importantes:")
                lista_pontos = list(pontos)
-               for i in lista_pontos:
-                   st.markdown(f"#### - "+ i)
+               for i, ponto in enumerate(lista_pontos, start=1):
+                   st.write(i, ' - ', ponto.capitalize())
                inputs = {'texto': texto, 'pontos': pontos}
                recrutador, analisar = criar_agent_task(llm_groq, texto, pontos)            
                crew = Crew(
