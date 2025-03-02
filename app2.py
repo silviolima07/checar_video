@@ -33,6 +33,40 @@ TEXT_FILE =  'audio.txt'
 load_dotenv()  ## load all the environment variables
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
+# Listas para armazenar os dados
+nomes = []
+idades = []
+cidades = []
+educacao = []
+ingles = []
+linguagens = []
+experiencia = []
+voluntariado = []
+comunidades = []
+
+# Função para processar a resposta do modelo e extrair informações
+def processar_resposta(resposta):
+    # Extraindo informações da resposta (ajuste conforme necessário)
+    nome = resposta.split("Nome:")[1].strip()
+    idade = resposta.split("Idade:")[1].split("anos")[0].strip()
+    cidade = resposta.split("Cidade de Residência:")[1].split("\n")[0].strip()
+    educ = resposta.split("Nível de Educação:")[1].split("Nível de Inglês:")[0].strip()
+    ingl = resposta.split("Nível de Inglês:")[1].split("Experiência com Linguagens de Programação:")[0].strip()
+    ling = resposta.split("Experiência com Linguagens de Programação:")[1].split("Experiência Profissional:")[0].strip()
+    exp = resposta.split("Experiência Profissional:")[1].split("Experiência em Voluntariado:")[0].strip()
+    vol = resposta.split("Experiência em Voluntariado:")[1].split("Participação em Comunidades:")[0].strip()
+    com = resposta.split("Participação em Comunidades:")[1].split("Conclusão:")[0].strip()
+
+    # Adicionando os dados às listas
+    nomes.append(nome)
+    idades.append(idade)
+    cidades.append(cidade)
+    educacao.append(educ)
+    ingles.append(ingl)
+    linguagens.append(ling)
+    experiencia.append(exp)
+    voluntariado.append(vol)
+    comunidades.append(com)
 
 def extrair_audio(video_path):
     st.write('Video File: ', video_path)
@@ -254,6 +288,14 @@ def app():
                result = crew.kickoff(inputs=inputs)  
                st.write("Result:", result.raw)
                st.write("Token_usage:", result.token_usage)
+               processar_resposta(result.raw)
+               df = pd.DataFrame(dados)
+
+               # Exibindo o DataFrame
+               st.table(df)
+
+               # Salvando o DataFrame em um arquivo CSV (opcional)
+               df.to_csv("analise_candidatos.csv", index=False)
                               
         
 __init__()
