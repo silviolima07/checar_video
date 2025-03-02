@@ -141,15 +141,15 @@ def criar_agent_task(MODEL, texto, pontos):
         verbose=True,
         allow_delegation=False,
         llm=MODEL
-    )
+        )
 
     analisar = Task(
         description=f"Análise o texto: {texto} Identifique os pontos considerados importantes: {pontos}. Na resposta, formeça um resumo e indique se os pontos imprtantes foram identificados",
         expected_output="Respostas claras baseadas no texto.",
         agent=recrutador
-    )
+        )
 
-    
+    return recrutador, analisar
     
     
     
