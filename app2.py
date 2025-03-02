@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 import ffmpeg
 from pydub import AudioSegment
 from crewai import Agent, Task, Crew, Process
+from MyLLM import MyLLM
 
 from crewai import Agent, Task, Crew
 from groq import Groq  
@@ -22,18 +23,8 @@ GROQ_API_KEY = os.getenv('GROQ_API_KEY')
 
 # Configuração do cliente Groq
 client = Groq(api_key=GROQ_API_KEY)
+llm_groq = MyLLM.GROQ_DEEPSEEK
 
-# Função personalizada para usar o Groq como LLM
-def groq_llm(prompt):
-    response = client.chat.completions.create(
-        model="deepseek/deepseek-r1-distill-llama-70b",
-        messages=[
-            {"role": "system", "content": "Você é um assistente útil."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=1000
-    )
-    return response.choices[0].message.content
 
 MEDIA_FOLDER = 'medias'
 AUDIO_FILE = 'audio.wav'
@@ -152,7 +143,7 @@ def get_insights(video_path):
     genai.delete_file(video_file.name)
 
 
-def criar_agent_task(texto, pontos):
+def criar_agent_task(llm_groq, texto, pontos):
     """
     Criar a agente que irá  analisar o texto extraído,resumir e identificar os pontos importantes.
     """
@@ -162,7 +153,7 @@ def criar_agent_task(texto, pontos):
         backstory="Vocé é um recrutador experiênte e conssegue analisar um texto extraído de uma entrevista com um candidato.",
         verbose=True,
         allow_delegation=False,
-        llm=groq_llm
+        llm=llm_groq
         )
 
     analisar = Task(
@@ -248,7 +239,7 @@ def app():
                st.write("Text File:", texto)
                st.write("Pontos:", pontos)
                inputs = {'texto': texto, 'pontos': pontos}
-               recrutador, analisar = criar_agent_task(texto, pontos)            
+               recrutador, analisar = criar_agent_task(llm_groq, texto, pontos)            
                crew = Crew(
                     agents=[recrutador],
                     tasks=[analisar],
