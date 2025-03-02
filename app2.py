@@ -26,7 +26,7 @@ client = Groq(api_key=GROQ_API_KEY)
 # Função personalizada para usar o Groq como LLM
 def groq_llm(prompt):
     response = client.chat.completions.create(
-        model="deepseek-r1-distill-llama-70b",
+        model="deepseek/deepseek-r1-distill-llama-70b",
         messages=[
             {"role": "system", "content": "Você é um assistente útil."},
             {"role": "user", "content": prompt}
