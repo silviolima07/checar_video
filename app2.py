@@ -233,7 +233,7 @@ def app():
                     max_rpm=30
                      )
                
-               result = crew.kickoff(inputs=inputs)              
+               #result = crew.kickoff(inputs=inputs)              
         
 __init__()
 app()
