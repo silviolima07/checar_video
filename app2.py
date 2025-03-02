@@ -225,8 +225,8 @@ def app():
                
                st.write("Text File:", texto)
                st.write("Pontos:", pontos)
-               #inputs = {'texto': texto, 'pontos': pontos}
-               #recrutador, analisar = criar_agent_task(MODEL)            
+               inputs = {'texto': texto, 'pontos': pontos}
+               recrutador, analisar = criar_agent_task(MODEL, texto)            
                #crew = Crew(
                #     agents=[recrutador],
                #     tasks=[analisar],
