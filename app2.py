@@ -140,7 +140,7 @@ def criar_agent_task(MODEL):
         backstory="Vocé é um recrutador experiênte e conssegue analisar um texto extraído de uma entrevista com um candidato.",
         verbose=True,
         allow_delegation=False,
-        llm=f'groq/{MODEL}'
+        llm=f'deepseek/deepseek-r1-distill-llama-70b'
     )
 
     analisar = Task(
@@ -199,6 +199,7 @@ def app():
                    st.markdown("#### Extrair audio")
                    with st.spinner("Extraindo audio"):
                        # Extrair audio from video
+                       sleep(5)
                        audio = extrair_audio(video_path)
                except Exception as e:
                    st.error(f'Checar extrair_audio: {e}')
