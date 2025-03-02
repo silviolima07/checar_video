@@ -130,7 +130,7 @@ def get_insights(video_path):
     genai.delete_file(video_file.name)
 
 
-def criar_agent_task(MODEL):
+def criar_agent_task(MODEL, texto, pontos):
     """
     Criar a agente que irá  analisar o texto extraído,resumir e identificar os pontos importantes.
     """
@@ -226,7 +226,7 @@ def app():
                st.write("Text File:", texto)
                st.write("Pontos:", pontos)
                inputs = {'texto': texto, 'pontos': pontos}
-               recrutador, analisar = criar_agent_task(MODEL, texto)            
+               recrutador, analisar = criar_agent_task(MODEL, texto, pontos)            
                #crew = Crew(
                #     agents=[recrutador],
                #     tasks=[analisar],
