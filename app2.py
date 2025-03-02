@@ -14,8 +14,11 @@ from crewai import Agent, Task, Crew, Process
 
 from crewai import Agent, Task, Crew
 from groq import Groq  
-
+import os
 load_dotenv()
+
+# Obter a chave da API GROQ
+GROQ_API_KEY = os.getenv('GROQ_API_KEY')
 
 # Configuração do cliente Groq
 client = Groq(api_key=GROQ_API_KEY)
