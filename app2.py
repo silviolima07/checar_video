@@ -181,7 +181,7 @@ def app():
     
     #pontos = 'Level of education, English level, Experience with languages such as Python'
     pontos = 'Nível de Educação, Nível de Inglês , Experiência com Linguagens de Programação, Experiência Profssional,  Experiência em Voluntáriado, Participação em Comunidades'
-    
+    lista_pontos = ['Nível de Educação', 'Nível de Inglês' , 'Experiência com Linguagens de Programação', 'Experiência Profssional',  'Experiência em Voluntáriado', 'Participação em Comunidades']
     lista_model = ["deepseek-r1-distill-qwen-32b", 'gemini-1.5-flash']
     MODEL = st.sidebar.selectbox(
         "Selecione o modelo:",
@@ -239,7 +239,6 @@ def app():
                
                #st.write("Text File:", texto)
                st.markdown("### Pontos Importantes:")
-               lista_pontos = list(pontos)
                for i, ponto in enumerate(lista_pontos, start=1):
                    st.write(i, ' - ', ponto.capitalize())
                inputs = {'texto': texto, 'pontos': pontos}
