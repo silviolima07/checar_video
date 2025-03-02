@@ -248,7 +248,9 @@ def app():
                     max_rpm=30
                      )
                
-               result = crew.kickoff(inputs=inputs)              
+               result = crew.kickoff(inputs=inputs)  
+               st.write("Result:", result)
+                              
         
 __init__()
 app()
