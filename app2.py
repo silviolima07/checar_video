@@ -223,15 +223,17 @@ def app():
                with open(file_path, 'r', encoding='utf-8') as f:
                   texto = f.read()
                
-               inputs = {'texto': texto, 'pontos': pontos}
-               recrutador, analisar = criar_agent_task(MODEL)            
-               crew = Crew(
-                    agents=[recrutador],
-                    tasks=[analisar],
-                    process=Process.sequential,
-                    verbose=False,
-                    max_rpm=30
-                     )
+               st.write("Text File:", texto)
+               st.write("Pontos:", pontos)
+               #inputs = {'texto': texto, 'pontos': pontos}
+               #recrutador, analisar = criar_agent_task(MODEL)            
+               #crew = Crew(
+               #     agents=[recrutador],
+               #     tasks=[analisar],
+               #     process=Process.sequential,
+               #     verbose=False,
+               #     max_rpm=30
+               #      )
                
                #result = crew.kickoff(inputs=inputs)              
         
