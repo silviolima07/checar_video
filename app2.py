@@ -249,7 +249,8 @@ def app():
                      )
                
                result = crew.kickoff(inputs=inputs)  
-               st.write("Result:", result)
+               st.write("Result:", result.raw)
+               st.write("Token_usage:", result.token_usage)
                               
         
 __init__()
