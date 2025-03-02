@@ -179,7 +179,8 @@ def app():
     st.markdown("### Objetivo:")
     st.markdown("#### Identificar pontos principais numa candidatura de vaga")
     
-    pontos = 'Level of education, English level, Experience with languages such as Python'
+    #pontos = 'Level of education, English level, Experience with languages such as Python'
+    pontos = 'Nível de Educação, Nível de Inglês , Experiência com Linguagens de Programação, Experiência Profssional,  Experiência em Voluntáriado, Participação em Comunidades'
     
     lista_model = ["deepseek-r1-distill-llama-70b", 'gemini-1.5-flash']
     MODEL = st.sidebar.selectbox(
@@ -236,8 +237,9 @@ def app():
                with open(file_path, 'r', encoding='utf-8') as f:
                   texto = f.read()
                
-               st.write("Text File:", texto)
-               st.write("Pontos:", pontos)
+               #st.write("Text File:", texto)
+               st.markdown("### Pontos Importantes:")
+               st.markdown("#### "+ pontos)
                inputs = {'texto': texto, 'pontos': pontos}
                recrutador, analisar = criar_agent_task(llm_groq, texto, pontos)            
                crew = Crew(
