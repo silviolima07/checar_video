@@ -182,7 +182,7 @@ def app():
     #pontos = 'Level of education, English level, Experience with languages such as Python'
     pontos = 'Nível de Educação, Nível de Inglês , Experiência com Linguagens de Programação, Experiência Profssional,  Experiência em Voluntáriado, Participação em Comunidades'
     
-    lista_model = ["deepseek-r1-distill-llama-70b", 'gemini-1.5-flash']
+    lista_model = ["deepseek-r1-distill-qwen-32b", 'gemini-1.5-flash']
     MODEL = st.sidebar.selectbox(
         "Selecione o modelo:",
         lista_model
@@ -230,8 +230,8 @@ def app():
                    st.error(f'Checar process_audio_data: {e}')
             
                #  Criar agent e task
-               st.markdown("#### Criar agent e task no CrewAI")
-               MODEL = f'deepseek/{MODEL}'
+               #st.markdown("#### Criar agent e task no CrewAI")
+               #MODEL = f'deepseek/{MODEL}'
                
                file_path = f'{MEDIA_FOLDER}/{TEXT_FILE}' # Text File
                with open(file_path, 'r', encoding='utf-8') as f:
@@ -239,7 +239,9 @@ def app():
                
                #st.write("Text File:", texto)
                st.markdown("### Pontos Importantes:")
-               st.markdown("#### "+ pontos)
+               lista_pontos = list(pontos)
+               for i in lista_pontos:
+                   st.markdown(f"#### - "+ i)
                inputs = {'texto': texto, 'pontos': pontos}
                recrutador, analisar = criar_agent_task(llm_groq, texto, pontos)            
                crew = Crew(
