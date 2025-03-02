@@ -140,7 +140,7 @@ def criar_agent_task():
         backstory="Vocé é um recrutador experiênte e conssegue analisar um texto extraído de uma entrevista com um candidato.",
         verbose=True,
         allow_delegation=False,
-        llm=llm
+        llm=f'groq/{MODEL}'
     )
 
     analisar = Task(
@@ -175,9 +175,8 @@ def app():
     st.sidebar.markdown("## " + MODEL)
     
     
-    
     # Initialize LLM
-    llm = ChatGroq(
+    llm_chat = ChatGroq(
             model=MODEL,
             temperature=0,
             max_tokens=None,
