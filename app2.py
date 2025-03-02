@@ -140,7 +140,7 @@ def criar_agent_task(MODEL):
         backstory="Vocé é um recrutador experiênte e conssegue analisar um texto extraído de uma entrevista com um candidato.",
         verbose=True,
         allow_delegation=False,
-        llm=f'deepseek/deepseek-r1-distill-llama-70b'
+        llm=MODEL
     )
 
     analisar = Task(
@@ -166,7 +166,7 @@ def app():
     st.markdown("### Objetivo:")
     st.markdown("#### Identificar pontos principais numa candidatura de vaga")
     
-    lista_model = ["llama-3.1-70b-versatile", 'gemini-1.5-flash']
+    lista_model = ["deepseek-r1-distill-llama-70b", 'gemini-1.5-flash']
     MODEL = st.sidebar.selectbox(
         "Selecione o modelo:",
         lista_model
@@ -199,7 +199,7 @@ def app():
                    st.markdown("#### Extrair audio")
                    with st.spinner("Extraindo audio"):
                        # Extrair audio from video
-                       sleep(5)
+                       time.sleep(5)
                        audio = extrair_audio(video_path)
                except Exception as e:
                    st.error(f'Checar extrair_audio: {e}')
@@ -215,9 +215,18 @@ def app():
             
                #  Criar agent e task
                st.markdown("#### Criar agent e task no CrewAI")
+               MODEL = f'deepseek/{MODEL'
+               inputs = {'texto': transcribed_text, 'pontos': pontos}
                recrutador, analisar = criar_agent_task(MODEL)            
-               crew = Crew(agents=[recrutador], tasks=[analisar])
-               inputs = {'texto': transcribed_text, 'pontos': pontos}           
+               crew = Crew(
+                agents=[recrutador],
+                tasks=[analisar],
+                process=Process.sequential,
+                verbose=False,
+                max_rpm=30
+                )
+               
+                result = crew.kickoff(inputs=inputs)              
         
 __init__()
 app()
