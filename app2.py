@@ -215,7 +215,7 @@ def app():
             
                #  Criar agent e task
                st.markdown("#### Criar agent e task no CrewAI")
-               MODEL = f'deepseek/{MODEL'
+               MODEL = f'deepseek/{MODEL}'
                inputs = {'texto': transcribed_text, 'pontos': pontos}
                recrutador, analisar = criar_agent_task(MODEL)            
                crew = Crew(
